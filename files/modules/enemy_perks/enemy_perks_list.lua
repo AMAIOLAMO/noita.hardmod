@@ -520,6 +520,66 @@ local perks = {
 			EntityAddChild(entity_id, child_id)
 		end
 	},
+	{
+		id = "DWARFED",
+		name = "$hardmod_eperk_dwarfed_name",
+		description = "$hardmod_eperk_dwarfed_desc",
+		weight = 100,
+		priority = 0,
+		max = 1,
+		condition = function(self, data)
+			return not data.dwarfed
+		end,
+		func = function(self, entity_id, data)
+			local hbc = EntityGetFirstComponent(entity_id, "HitboxComponent")
+
+			local sprite_comps = EntityGetComponentIncludingDisabled(entity_id, "SpriteComponent") or {}
+
+			local dmc = EntityGetFirstComponent(entity_id, "DamageModelComponent")
+
+			local DWARF_HITBOX_SCALE = 0.5
+			local DWARF_SPRITE_SCALE = 0.5
+			local DWARF_HP_SCALE = 0.8
+
+			if hbc then
+			    local min_x = ComponentGetValue2(hbc, "aabb_min_x")
+			    local max_x = ComponentGetValue2(hbc, "aabb_max_x")
+			    local min_y = ComponentGetValue2(hbc, "aabb_min_y")
+			    local max_y = ComponentGetValue2(hbc, "aabb_max_y")
+
+
+				ComponentSetValue2(hbc, "aabb_min_x", min_x * DWARF_HITBOX_SCALE)
+				ComponentSetValue2(hbc, "aabb_max_x", max_x * DWARF_HITBOX_SCALE)
+				ComponentSetValue2(hbc, "aabb_min_y", min_y * DWARF_HITBOX_SCALE)
+				ComponentSetValue2(hbc, "aabb_max_y", max_y * DWARF_HITBOX_SCALE)
+			end
+
+			GamePrint(string.format("Found sprite comp %d", #sprite_comps))
+
+			for i, sprc in ipairs(sprite_comps) do
+				ComponentSetValue2(sprc, "has_special_scale", true)
+
+				local special_scale_x = ComponentGetValue2(sprc, "special_scale_x")
+				local special_scale_y = ComponentGetValue2(sprc, "special_scale_y")
+
+				ComponentSetValue2(sprc, "special_scale_x", special_scale_x * DWARF_SPRITE_SCALE)
+				ComponentSetValue2(sprc, "special_scale_y", special_scale_y * DWARF_SPRITE_SCALE)
+			end
+
+			if dmc then
+				local max_hp = ComponentGetValue2(dmc, "max_hp")
+				ComponentSetValue2(dmc, "max_hp", max_hp * DWARF_HP_SCALE)
+			end
+
+			EntityAddComponent2(entity_id, "LuaComponent", {
+				script_source_file = "mods/noita.hardmod/files/modules/enemy_perks/scripts/dwarfed_update.lua",
+				execute_every_n_frame = 1,
+			})
+
+
+			data.dwarfed = "dwarfed"
+		end
+	},
 }
 
 for _,perk in ipairs(perks) do

@@ -218,6 +218,8 @@ hardmod_eperk_polymorph_immunity_name,Polymorph Immunity,Иммунитет к �
 hardmod_eperk_polymorph_immunity_desc,Causes an enemy to be unable to be polymorphed.,Враг не подвержен полиморфину.,,,,,,,,,,,,
 hardmod_eperk_polymorph_blood_name,Polymorph Blood,Кровь из полиморфина,,,,,,,,,,,,
 hardmod_eperk_polymorph_blood_desc,"Causes an enemy to bleed a form of Polymorphine, and cannot be polymorphed",Враг не подвержен полиморфину и истекает им.,,,,,,,,,,,,
+hardmod_eperk_dwarfed_name,"Dwarfed",,,,,,,,,,,,,
+hardmod_eperk_dwarfed_desc,"Causes an enemy to be smaller. Their health also decreases.",,,,,,,,,,,,,
 hardmod_status_polymorph_name,Polymorph,Полиморф,Polimorfia,,,,,,,,,,,
 hardmod_status_polymorph_desc,You have become something fluffy.,Вы стали чем-то пушистым.,Você se tornou algo fofinho.,,,,,,,,,,,
 hardmod_status_polymorph_trans_day,Your pronouns are she/ep.,Ваши произношения - Она/Её.,Você se tornou algo fofinho.,,,,,,,,,,,
